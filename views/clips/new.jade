@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+    h1.
+        #{title}
+    form#formAddClip(name="addclip",method="post",action="/clips")
+        p Name:
+            input#inputName(type="text", placeholder="Identity", name="identity")
+        p Duration: 
+            input#inputDuration(type="text", placeholder="Duration", name="duration")
+        p Processed?: 
+            input#inputProcessed(type="checkbox", name="processed")
+        p
+            button#btnSubmit(type="submit") submit
