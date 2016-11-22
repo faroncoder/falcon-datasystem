@@ -18,7 +18,7 @@ router.route( '/' )
 	//GET all blobs
 	.get( function( req, res, next ) {
 		//retrieve all blobs from Monogo
-		mongoose.model( 'manifest' ).find( {}, function( err, clips ) {
+		mongoose.model( 'clips' ).find( {}, function( err, clips ) {
 			if( err ) {
 				return console.error( err );
 			} else {
@@ -43,14 +43,25 @@ router.route( '/' )
 	.post( function( req, res ) {
 		// Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
 		var identity = req.body.identity;
+		var ratio = req.body.ratio;
+		var aspect = req.body.aspect;
+		var pixel = req.body.pixel;
+		var calcuated = req.body.calcuated;
+		var size = req.body.size;
 		var duration = req.body.duration;
 		var processed = req.body.processed;
 		//var id = req.body._id;
 		//call the create function for our database
-		mongoose.model( 'manifest' ).create( {
+		mongoose.model( 'clips' ).create( {
 			identity: identity,
 			duration: duration,
-			processed: processed
+			processed: processed,
+			aspect: aspect,
+			ratio: ratio,
+			aspect: aspect,
+			pixel: pixel,
+			calcuated: calcuated,
+			size: size
 		}, function( err, clip ) {
 			if( err ) {
 				res.send( "There was a problem adding the information to the database." );
@@ -81,7 +92,7 @@ router.get( '/new', function( req, res ) {
 router.param( 'id', function( req, res, next, id ) {
 	console.log( 'validating ' + id + ' exists' );
 	//find the ID in the Database
-	mongoose.model( 'manifest' ).findById( id, function( err, clip ) {
+	mongoose.model( 'clips' ).findById( id, function( err, clip ) {
 		//if it isn't found, we are going to repond with 404
 		if( err ) {
 			console.log( id + ' was not found' );
@@ -108,7 +119,7 @@ router.param( 'id', function( req, res, next, id ) {
 	} );
 } );
 router.route( '/:id' ).get( function( req, res ) {
-	mongoose.model( 'manifest' ).findById( req.id, function( err, clip ) {
+	mongoose.model( 'clips' ).findById( req.id, function( err, clip ) {
 		if( err ) {
 			console.log( 'GET Error: There was a problem retrieving: ' + err );
 		} else {
@@ -131,7 +142,7 @@ router.route( '/:id' ).get( function( req, res ) {
 //GET the individual blob by Mongo ID
 router.get( '/:id/edit', function( req, res ) {
 	//search for the blob within Mongo
-	mongoose.model( 'manifest' ).findById( req.id, function( err, clip ) {
+	mongoose.model( 'clips' ).findById( req.id, function( err, clip ) {
 		if( err ) {
 			console.log( 'GET Error: There was a problem retrieving: ' + err );
 		} else {
@@ -160,15 +171,26 @@ router.get( '/:id/edit', function( req, res ) {
 router.put( '/:id/edit', function( req, res ) {
 	// Get our REST or form values. These rely on the "name" attributes
 	var identity = req.body.identity;
+	var ratio = req.body.ratio;
+	var aspect = req.body.aspect;
+	var pixel = req.body.pixel;
+	var calcuated = req.body.calcuated;
+	var size = req.body.size;
 	var duration = req.body.duration;
 	var processed = req.body.processed;
 	//find the document by ID
-	mongoose.model( 'manifest' ).findById( req.id, function( err, clip ) {
+	mongoose.model( 'clips' ).findById( req.id, function( err, clip ) {
 		//update it
 		clip.update( {
 			identity: identity,
 			duration: duration,
-			processed: processed
+			processed: processed,
+			aspect: aspect,
+			ratio: ratio,
+			aspect: aspect,
+			pixel: pixel,
+			calcuated: calcuated,
+			size: size
 		}, function( err, clipID ) {
 			if( err ) {
 				res.send(
@@ -192,7 +214,7 @@ router.put( '/:id/edit', function( req, res ) {
 //DELETE a Blobby ID
 router.delete( '/:id/edit', function( req, res ) {
 	//find blob by ID
-	mongoose.model( 'manifest' ).findById( req.id, function( err, clip ) {
+	mongoose.model( 'clips' ).findById( req.id, function( err, clip ) {
 		if( err ) {
 			return console.error( err );
 		} else {

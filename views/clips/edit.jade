@@ -8,6 +8,16 @@ block content
             input#inputName(type='text', value='#{clip.identity}', name='identity' )
         p Duration: 
             input#inputDuration(type='text', value='#{clip.duration}', name='duration')
+        p Aspect:
+            input#inputAspect(type="text", value='#{clip.aspect}', name="aspect")
+        p Ratio:
+            input#inputRatio(type="text", value='#{clip.ratio}', name="ratio")
+        p Pixel:
+            input#inputPixel(type="text", value='#{clip.pixel}', name="pixel")
+        p Caluclated:
+            input#inputCaluclated(type="text", value='#{clip.calcuated}', name="caluclated")
+        p Size:
+            input#inputSize(type="text", value='#{clip.size}', name="size")
         p Processed?: 
             input#inputProcessed(type='checkbox', name='processed', checked=('#{clip.processed}'==='true' ? "checked" : undefined))
         p 
@@ -15,3 +25,7 @@ block content
         p 
             button#btnSubmit(type='submit').
                 Update
+
+
+
+

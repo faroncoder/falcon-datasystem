@@ -3,6 +3,16 @@ extends ../layout
 block content
     h1.
         Clip #{clip._id}
+    P Snapshot:
+    p
+    img#imgName(src='http://192.168.1.6:7780/thumbs/#{clip.identity}-3.png')
+
     p Identity: #{clip.identity}
     p Duration: #{clip.duration}
     p Processed: #{clip.processed}
+    p Aspect: #{clip.aspect}
+    p Ratio: #{clip.ratio}
+    p Pixel: #{clip.pixel}
+    p Caluclated: #{clip.calcuated}
+    p Size: #{clip.size}
+

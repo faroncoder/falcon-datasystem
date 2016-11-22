@@ -9,6 +9,12 @@ block content
                 = clip.identity
                 = clip.duration
                 = clip.processed
+                = clip.aspect
+                = clip.ratio
+                = clip.aspect
+                = clip.pixel
+                = clip.calcuated
+                = clip.size
                 = clip._id
                 form(action='/clips/#{clip._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
                     input(type='hidden',value='DELETE',name='_method')
@@ -18,4 +24,6 @@ block content
                     a(href='/clips/#{clip._id}/edit') Edit
                 p
                     a(href='/clips/#{clip._id}') Show
-
+    div.pager(class='text-center')
+        input(type='hidden',value='<%= totalRecords %>',id='totalRecords')
+        input(type='hidden',value='<%= size %>',id='size')
